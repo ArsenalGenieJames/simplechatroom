@@ -2,6 +2,7 @@
   flex: 1;
   overflow-y: auto;
   background-color: white;
+  -webkit-overflow-scrolling: touch;
 }
 
 .conversations-list::-webkit-scrollbar {
@@ -24,24 +25,31 @@
 .empty-state {
   padding: 40px 20px;
   text-align: center;
+  font-family: 'Inter', sans-serif;
   color: #999;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .conversation-item {
   padding: 12px 20px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #EFEFEF;
   cursor: pointer;
   transition: background-color 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .conversation-item:hover {
   background-color: #f9f9f9;
 }
 
+.conversation-item:active {
+  background-color: #f0f0f0;
+}
+
 .conversation-item.active {
-  background: linear-gradient(90deg, rgba(13, 110, 253, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-  border-left: 4px solid #0d6efd;
+  background: linear-gradient(90deg, rgba(136, 109, 221, 0.1) 0%, rgba(43, 107, 190, 0.1) 100%);
+  border-left: 4px solid #886DDD;
   padding-left: 16px;
 }
 
@@ -58,10 +66,12 @@
 }
 
 .conversation-title {
-  font-weight: 500;
-  color: #333;
-  font-size: 14px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  color: #181C2A;
+  font-size: 15px;
   margin-bottom: 4px;
+  word-break: break-word;
 }
 
 .conversation-meta {
@@ -78,10 +88,122 @@
   border-radius: 12px;
   font-size: 11px;
   font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .conversation-date {
   font-size: 12px;
   color: #999;
   white-space: nowrap;
+}
+
+/* Mobile responsive (600px) */
+@media (max-width: 600px) {
+  .empty-state {
+    padding: 30px 12px;
+    font-size: 12px;
+  }
+
+  .conversation-item {
+    padding: 10px 12px;
+  }
+
+  .conversation-item.active {
+    padding-left: 8px;
+  }
+
+  .conversation-title {
+    font-size: 13px;
+  }
+
+  .conversation-date {
+    font-size: 11px;
+  }
+
+  .unread-badge {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+}
+
+/* Extra small phones (480px) */
+@media (max-width: 480px) {
+  .conversations-list {
+    font-size: 12px;
+  }
+
+  .empty-state {
+    padding: 25px 10px;
+    font-size: 11px;
+  }
+
+  .conversation-item {
+    padding: 8px 10px;
+  }
+
+  .conversation-title {
+    font-size: 12px;
+  }
+
+  .conversation-date {
+    font-size: 10px;
+  }
+
+  .unread-badge {
+    padding: 1px 5px;
+    font-size: 9px;
+    min-width: 18px;
+  }
+}
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .conversations-list {
+  background: #252D3D;
+}
+
+body.midnight-mode .empty-state {
+  color: #8A92A5;
+}
+
+body.midnight-mode .conversation-item {
+  border-bottom-color: #3A4455;
+}
+
+body.midnight-mode .conversation-item:hover {
+  background-color: rgba(136, 109, 221, 0.05);
+}
+
+body.midnight-mode .conversation-item:active {
+  background-color: rgba(136, 109, 221, 0.1);
+}
+
+body.midnight-mode .conversation-item.active {
+  background: linear-gradient(90deg, rgba(136, 109, 221, 0.15) 0%, rgba(43, 107, 190, 0.1) 100%);
+  border-left-color: #886DDD;
+}
+
+body.midnight-mode .conversation-item.unread {
+  background: rgba(136, 109, 221, 0.1);
+}
+
+body.midnight-mode .conversation-title {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .conversation-preview {
+  color: #B8C1D4;
+}
+
+body.midnight-mode .conversation-date {
+  color: #8A92A5;
+}
+
+body.midnight-mode .unread-badge {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  color: #EFEFEF;
 }

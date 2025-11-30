@@ -40,7 +40,7 @@
 }
 
 .app-header {
-  background: linear-gradient(90deg, #0d6efd 0%, #a855f7 100%);
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
   color: white;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -55,17 +55,19 @@
 }
 
 .app-header h1 {
+  font-family: 'Rubik', sans-serif;
   margin: 0;
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .logout-btn {
   padding: 10px 20px;
-  background-color: #dc3545;
+  background-color: #2B6BBE;
   color: white;
   border: none;
   border-radius: 6px;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -73,7 +75,7 @@
 }
 
 .logout-btn:hover {
-  background-color: #c82333;
+  background-color: #1f4d8a;
 }
 
 .app-main {
@@ -85,16 +87,58 @@
 }
 
 .welcome-text {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
+  font-family: 'Rubik', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #181C2A;
   margin: 0 0 10px 0;
 }
 
 .subtitle-text {
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
-  color: #999;
+  color: #666;
   margin: 0;
+}
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode {
+  background-color: #181C2A;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .App {
+  background: linear-gradient(135deg, #181C2A 0%, #252D3D 50%, #1f2633 100%);
+  color: #EFEFEF;
+}
+
+body.midnight-mode .app-header {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  border-bottom: 2px solid rgba(136, 109, 221, 0.3);
+}
+
+body.midnight-mode .app-header h1 {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .logout-btn {
+  background: rgba(43, 107, 190, 0.8);
+  border: 1px solid rgba(136, 109, 221, 0.5);
+}
+
+body.midnight-mode .logout-btn:hover {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+}
+
+body.midnight-mode .welcome-text {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .subtitle-text {
+  color: #B8C1D4;
 }
 
 /* Responsive Design */

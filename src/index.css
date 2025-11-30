@@ -4,12 +4,124 @@
   box-sizing: border-box;
 }
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Brand Colors */
+:root {
+  --color-primary-dark: #181C2A;
+  --color-primary-blue: #2B6BBE;
+  --color-primary-purple: #886DDD;
+  --color-light-gray: #EFEFEF;
+  
+  --gradient-primary: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  
+  --font-headline: 'Rubik', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* Midnight Mode Colors */
+body.midnight-mode {
+  --color-bg-primary: #181C2A;
+  --color-bg-secondary: #252D3D;
+  --color-bg-tertiary: #2E3647;
+  --color-text-primary: #EFEFEF;
+  --color-text-secondary: #B8C1D4;
+  --color-border: #3A4455;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--color-light-gray);
+  color: var(--color-primary-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.midnight-mode {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+body.midnight-mode h1,
+body.midnight-mode h2,
+body.midnight-mode h3,
+body.midnight-mode h4,
+body.midnight-mode h5,
+body.midnight-mode h6 {
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+h4 {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+h6 {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-primary-dark);
+}
+
+body.midnight-mode p {
+  color: var(--color-text-secondary);
+}
+
+.text-sm {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.text-xs {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.text-username {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.text-message {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-primary-dark);
 }
 
 code {

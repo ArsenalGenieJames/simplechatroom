@@ -4,6 +4,7 @@
   padding: 16px 20px;
   border-top: 1px solid #e0e0e0;
   background-color: white;
+  flex-shrink: 0;
 }
 
 .message-input {
@@ -14,6 +15,8 @@
   font-size: 14px;
   font-family: inherit;
   transition: all 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .message-input:focus {
@@ -42,6 +45,12 @@
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  min-width: 60px;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .message-send-btn:hover:not(:disabled) {
@@ -50,7 +59,7 @@
 }
 
 .message-send-btn:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.95);
 }
 
 .message-send-btn:disabled {
@@ -69,6 +78,7 @@
   gap: 8px;
   font-size: 13px;
   color: #999;
+  flex-shrink: 0;
 }
 
 .typing-indicator span {
@@ -111,8 +121,25 @@
   }
 }
 
-/* Mobile responsive */
-@media (max-width: 600px) {
+/* Tablet responsive (1024px) */
+@media (max-width: 1024px) {
+  .message-form {
+    padding: 14px 18px;
+  }
+
+  .message-input {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+
+  .message-send-btn {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+}
+
+/* Small tablets (768px) */
+@media (max-width: 768px) {
   .message-form {
     padding: 12px 16px;
     gap: 8px;
@@ -131,5 +158,73 @@
   .typing-indicator {
     padding: 6px 16px;
     font-size: 12px;
+  }
+}
+
+/* Mobile phones (600px) */
+@media (max-width: 600px) {
+  .message-form {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .message-input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 18px;
+  }
+
+  .message-send-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+    min-width: 50px;
+    border-radius: 18px;
+  }
+
+  .typing-indicator {
+    padding: 6px 14px;
+    font-size: 11px;
+  }
+}
+
+/* Extra small phones (480px) */
+@media (max-width: 480px) {
+  .message-form {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .message-input {
+    padding: 7px 11px;
+    font-size: 14px;
+    border-radius: 16px;
+  }
+
+  .message-send-btn {
+    padding: 7px 12px;
+    font-size: 11px;
+    min-width: 45px;
+    border-radius: 16px;
+  }
+
+  .typing-indicator {
+    padding: 5px 12px;
+    font-size: 10px;
+  }
+
+  .typing-dots span {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* iPhone keyboard adjustment */
+@supports (-webkit-touch-callout: none) {
+  .message-input {
+    font-size: 16px;
+  }
+
+  .message-input:focus {
+    font-size: 16px;
   }
 }

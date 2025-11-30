@@ -16,7 +16,7 @@ export default function SettingsPage({ user, onBack }) {
   const [notifications, setNotifications] = useState(true)
   const [typingIndicators, setTypingIndicators] = useState(true)
   const [soundEnabled, setSoundEnabled] = useState(true)
-  const [darkMode, setDarkMode] = useState(false)
+  const [midnightMode, setMidnightMode] = useState(false)
 
   // Fetch user profile on mount
   useEffect(() => {
@@ -40,12 +40,12 @@ export default function SettingsPage({ user, onBack }) {
         const savedNotifications = localStorage.getItem('notifications_enabled')
         const savedTyping = localStorage.getItem('typing_indicators_enabled')
         const savedSound = localStorage.getItem('sound_enabled')
-        const savedDarkMode = localStorage.getItem('dark_mode')
+        const savedMidnightMode = localStorage.getItem('midnight_mode')
         
         if (savedNotifications !== null) setNotifications(savedNotifications === 'true')
         if (savedTyping !== null) setTypingIndicators(savedTyping === 'true')
         if (savedSound !== null) setSoundEnabled(savedSound === 'true')
-        if (savedDarkMode !== null) setDarkMode(savedDarkMode === 'true')
+        if (savedMidnightMode !== null) setMidnightMode(savedMidnightMode === 'true')
       } catch (error) {
         console.error('Error fetching profile:', error)
         setError('Failed to load profile')
@@ -104,14 +104,14 @@ export default function SettingsPage({ user, onBack }) {
     localStorage.setItem('sound_enabled', enabled)
   }
 
-  const handleToggleDarkMode = (enabled) => {
-    setDarkMode(enabled)
-    localStorage.setItem('dark_mode', enabled)
-    // Apply dark mode (would need global theme implementation)
+  const handleToggleMidnightMode = (enabled) => {
+    setMidnightMode(enabled)
+    localStorage.setItem('midnight_mode', enabled)
+    // Apply midnight mode with brand color gradient
     if (enabled) {
-      document.body.classList.add('dark-mode')
+      document.body.classList.add('midnight-mode')
     } else {
-      document.body.classList.remove('dark-mode')
+      document.body.classList.remove('midnight-mode')
     }
   }
 
@@ -152,6 +152,28 @@ export default function SettingsPage({ user, onBack }) {
 
       {/* Settings Content */}
       <div className="settings-content">
+        {/* User Profile Card */}
+        <section className="settings-section user-profile-card">
+          <div className="user-card-container">
+            <div className="user-card-avatar-wrapper">
+              <div className="user-card-avatar">
+                {userProfile?.avatar_url ? (
+                  <img src={userProfile.avatar_url} alt={userProfile.username} />
+                ) : (
+                  <span className="avatar-placeholder">
+                    {userProfile?.username?.charAt(0).toUpperCase() || 'U'}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="user-card-info">
+              <div className="user-card-name">{userProfile?.display_name || userProfile?.username || 'User'}</div>
+              <div className="user-card-username">@{userProfile?.username || 'username'}</div>
+              <div className="user-card-email">{user?.email}</div>
+            </div>
+          </div>
+        </section>
+
         {/* Profile Section */}
         <section className="settings-section">
           <h2>Profile Settings</h2>
@@ -261,14 +283,14 @@ export default function SettingsPage({ user, onBack }) {
           <div className="settings-toggle">
             <div className="toggle-item">
               <div className="toggle-info">
-                <h3>Dark Mode</h3>
-                <p>Use dark theme for the app</p>
+                <h3>Midnight Mode</h3>
+                <p>Beautiful dark theme with brand gradient</p>
               </div>
               <label className="toggle-switch">
                 <input
                   type="checkbox"
-                  checked={darkMode}
-                  onChange={(e) => handleToggleDarkMode(e.target.checked)}
+                  checked={midnightMode}
+                  onChange={(e) => handleToggleMidnightMode(e.target.checked)}
                 />
                 <span className="slider"></span>
               </label>
@@ -281,7 +303,8 @@ export default function SettingsPage({ user, onBack }) {
           <h2>Account</h2>
           <div className="account-info">
             <p>
-              <strong>Email:</strong> {userProfile?.email || user?.email}
+              <strong>Joined:</strong>{' '}
+              {new Date(userProfile?.created_at).toLocaleDateString()}
             </p>
             <p>
               <strong>User ID:</strong> {user?.id}
@@ -290,23 +313,6 @@ export default function SettingsPage({ user, onBack }) {
           <button className="btn-logout" onClick={handleLogout}>
             Logout
           </button>
-        </section>
-
-        {/* App Info */}
-        <section className="settings-section info-section">
-          <h2>About</h2>
-          <div className="info-content">
-            <p>
-              <strong>App Name:</strong> Simple Chat Room
-            </p>
-            <p>
-              <strong>Version:</strong> 1.0.0
-            </p>
-            <p>
-              <strong>Joined:</strong>{' '}
-              {new Date(userProfile?.created_at).toLocaleDateString()}
-            </p>
-          </div>
         </section>
       </div>
     </div>

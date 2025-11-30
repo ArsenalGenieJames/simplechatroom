@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import './Auth.css'
 
@@ -9,6 +9,16 @@ export default function Auth() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
+
+  // Load and apply midnight mode on mount
+  useEffect(() => {
+    const savedMidnightMode = localStorage.getItem('midnight_mode')
+    if (savedMidnightMode === 'true') {
+      document.body.classList.add('midnight-mode')
+    } else {
+      document.body.classList.remove('midnight-mode')
+    }
+  }, [])
 
   const handleAuth = async (e) => {
     e.preventDefault()

@@ -119,9 +119,6 @@ export default function Login({ onSwitchToSignUp }) {
         </div>
 
         {/* Footer */}
-        <p className="auth-footer">
-          © 2025 Chat Room. All rights reserved.
-        </p>
       </div>
     </div>
   )

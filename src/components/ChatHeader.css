@@ -1,15 +1,44 @@
 .chat-header {
   padding: 16px 20px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #EFEFEF;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .chat-header h3 {
+  font-family: 'Rubik', sans-serif;
   margin: 0;
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: #181C2A;
+  flex: 1;
+}
+
+.back-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #2B6BBE;
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+  color: #886DDD;
+}
+
+.back-button:active {
+  transform: scale(0.95);
 }
 
 /* Mobile responsive */
@@ -21,4 +50,31 @@
   .chat-header h3 {
     font-size: 14px;
   }
+
+  .back-button {
+    display: block;
+  }
+}
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .chat-header {
+  background-color: #2E3647;
+  border-bottom: 1px solid #3A4455;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.midnight-mode .chat-header h3 {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .back-button {
+  color: #886DDD;
+}
+
+body.midnight-mode .back-button:hover {
+  background-color: rgba(136, 109, 221, 0.1);
+  color: #EFEFEF;
 }

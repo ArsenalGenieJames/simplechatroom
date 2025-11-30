@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
 import SearchBar from '../components/SearchBar'
 import ConversationsList from '../components/ConversationsList'
-import UserProfile from '../components/UserProfile'
 import ChatHeader from '../components/ChatHeader'
 import MessagesList from '../components/MessagesList'
 import MessageInput from '../components/MessageInput'
@@ -29,6 +28,7 @@ export default function ChatPage({ user }) {
   const [replyingTo, setReplyingTo] = useState(null)
   const [repliesLoading, setRepliesLoading] = useState({})
   const [showSettings, setShowSettings] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Request notification permission and send notifications
   const requestNotificationPermission = async () => {
@@ -63,6 +63,14 @@ export default function ChatPage({ user }) {
 
     // Request notification permission on mount
     requestNotificationPermission()
+
+    // Load and apply midnight mode on component mount
+    const savedMidnightMode = localStorage.getItem('midnight_mode')
+    if (savedMidnightMode === 'true') {
+      document.body.classList.add('midnight-mode')
+    } else {
+      document.body.classList.remove('midnight-mode')
+    }
 
     const fetchUserProfile = async () => {
       try {
@@ -703,22 +711,25 @@ export default function ChatPage({ user }) {
 
   return (
     <div className="chat-container">
+      {/* Overlay for mobile sidebar */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar - Conversations List */}
-      <div className="chat-sidebar">
+      <div className={`chat-sidebar ${sidebarOpen ? 'open' : ''} ${!selectedConversation ? 'show-on-mobile' : ''}`}>
         <div className="chat-sidebar-header">
           <h2>Messages</h2>
-          <div className="sidebar-header-buttons">
-            <button className="btn-new-chat" title="New conversation">
-              +
-            </button>
-            <button
-              className="btn-settings"
-              title="Settings"
-              onClick={() => setShowSettings(true)}
-            >
-              ⚙
-            </button>
-          </div>
+          <button
+            className="btn-settings"
+            title="Settings"
+            onClick={() => setShowSettings(true)}
+          >
+            ⚙
+          </button>
         </div>
 
         {/* Search Bar Component */}
@@ -738,17 +749,17 @@ export default function ChatPage({ user }) {
             conversations={conversations}
             selectedConversation={selectedConversation}
             unreadCounts={unreadCounts}
-            onSelectConversation={setSelectedConversation}
+            onSelectConversation={(id) => {
+              setSelectedConversation(id)
+              setSidebarOpen(false)
+            }}
             getConversationTitle={getConversationTitle}
           />
         )}
-
-        {/* User Profile Component */}
-        <UserProfile userProfile={userProfile} user={user} />
       </div>
 
       {/* Main Chat Area */}
-      <div className="chat-main">
+      <div className={`chat-main ${!selectedConversation ? 'hidden-on-mobile' : ''}`}>
         {selectedConversation ? (
           <>
             {/* Chat Header Component */}
@@ -756,6 +767,7 @@ export default function ChatPage({ user }) {
               selectedConversation={selectedConversation}
               conversations={conversations}
               getConversationTitle={getConversationTitle}
+              onBackClick={() => setSelectedConversation(null)}
             />
 
             {/* Messages List Component */}

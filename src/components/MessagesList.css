@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -31,7 +32,10 @@
   justify-content: center;
   height: 100%;
   color: #999;
-  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  text-align: center;
+  padding: 20px;
 }
 
 .message {
@@ -39,50 +43,71 @@
   padding: 10px 14px;
   border-radius: 12px;
   margin-bottom: 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .message.sent {
   align-self: flex-end;
-  background-color: #0d6efd;
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
   color: white;
   border-bottom-right-radius: 4px;
 }
 
 .message.received {
   align-self: flex-start;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #EFEFEF;
+  color: #181C2A;
   border-bottom-left-radius: 4px;
 }
 
 .message-sender {
+  font-family: 'Rubik', sans-serif;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 4px;
   opacity: 0.8;
 }
 
 .message-body {
-  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
   word-wrap: break-word;
+  overflow-wrap: break-word;
   margin-bottom: 4px;
+  line-height: 1.4;
 }
 
 .message-time {
-  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
   opacity: 0.7;
 }
 
-/* Mobile responsive */
-@media (max-width: 600px) {
+/* Tablet responsive (1024px) */
+@media (max-width: 1024px) {
   .messages-container {
-    padding: 12px;
+    padding: 16px;
   }
 
   .message {
-    max-width: 85%;
-    padding: 8px 12px;
+    max-width: 75%;
+  }
+
+  .message-body {
     font-size: 13px;
+  }
+}
+
+/* Small tablets (768px) */
+@media (max-width: 768px) {
+  .messages-container {
+    padding: 14px;
+  }
+
+  .message {
+    max-width: 80%;
+    padding: 9px 13px;
   }
 
   .message-body {
@@ -92,4 +117,91 @@
   .message-time {
     font-size: 10px;
   }
+}
+
+/* Mobile phones (600px) */
+@media (max-width: 600px) {
+  .messages-container {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .message {
+    max-width: 85%;
+    padding: 8px 12px;
+    margin-bottom: 2px;
+  }
+
+  .message-sender {
+    font-size: 11px;
+  }
+
+  .message-body {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  .message-time {
+    font-size: 10px;
+  }
+
+  .empty-messages {
+    font-size: 13px;
+  }
+}
+
+/* Extra small phones (480px) */
+@media (max-width: 480px) {
+  .messages-container {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .message {
+    max-width: 90%;
+    padding: 7px 10px;
+    border-radius: 10px;
+  }
+
+  .message-sender {
+    font-size: 10px;
+  }
+
+  .message-body {
+    font-size: 12px;
+  }
+
+  .message-time {
+    font-size: 9px;
+  }
+}
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .messages-container {
+  background: linear-gradient(135deg, #252D3D 0%, #2E3647 100%);
+}
+
+body.midnight-mode .empty-messages {
+  color: #8A92A5;
+}
+
+body.midnight-mode .message.received {
+  background-color: #3A4455;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .message.sent {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  color: #EFEFEF;
+}
+
+body.midnight-mode .message-sender {
+  color: #B8C1D4;
+}
+
+body.midnight-mode .message-time {
+  color: #8A92A5;
 }

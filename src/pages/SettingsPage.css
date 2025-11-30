@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #f5f5f5;
+  background: #EFEFEF;
 }
 
 .settings-header {
@@ -11,19 +11,20 @@
   gap: 16px;
   padding: 20px;
   background: white;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #EFEFEF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .btn-back {
   background: none;
   border: none;
+  font-family: 'Rubik', sans-serif;
   font-size: 16px;
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 4px;
   transition: background-color 0.2s;
-  color: #0084ff;
+  color: #2B6BBE;
   font-weight: 600;
 }
 
@@ -32,15 +33,18 @@
 }
 
 .settings-header h1 {
+  font-family: 'Rubik', sans-serif;
   margin: 0;
   font-size: 28px;
-  color: #333;
+  color: #181C2A;
   flex: 1;
+  font-weight: 700;
 }
 
 .settings-error {
   background: #ffebee;
   color: #c62828;
+  font-family: 'Inter', sans-serif;
   padding: 12px 20px;
   margin: 0 20px;
   margin-top: 20px;
@@ -52,6 +56,7 @@
 .settings-success {
   background: #e8f5e9;
   color: #2e7d32;
+  font-family: 'Inter', sans-serif;
   padding: 12px 20px;
   margin: 0 20px;
   margin-top: 20px;
@@ -77,11 +82,99 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.settings-section.user-profile-card {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 15px;
+}
+
+.user-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.user-card-avatar-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.user-card-avatar {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 28px;
+  color: white;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.user-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+}
+
+.user-card-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+
+.user-card-name {
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+.user-card-username {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.user-card-email {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .settings-section h2 {
+  font-family: 'Rubik', sans-serif;
   margin: 0 0 20px 0;
   font-size: 18px;
-  color: #333;
-  border-bottom: 2px solid #f0f0f0;
+  font-weight: 700;
+  color: #181C2A;
+  border-bottom: 2px solid #EFEFEF;
   padding-bottom: 12px;
 }
 
@@ -99,26 +192,27 @@
 }
 
 .form-group label {
+  font-family: 'Rubik', sans-serif;
   font-weight: 600;
-  color: #333;
-  font-size: 14px;
+  color: #181C2A;
+  font-size: 15px;
 }
 
 .form-group input,
 .form-group textarea {
+  font-family: 'Inter', sans-serif;
   padding: 10px 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 14px;
-  font-family: inherit;
+  font-size: 15px;
   transition: border-color 0.2s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #0084ff;
-  box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.1);
+  border-color: #2B6BBE;
+  box-shadow: 0 0 0 3px rgba(43, 107, 190, 0.1);
 }
 
 .form-group input:disabled {
@@ -128,28 +222,31 @@
 }
 
 .form-group small {
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   color: #999;
 }
 
 .btn-save {
   padding: 12px 24px;
-  background: #0084ff;
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
   color: white;
+  font-family: 'Rubik', sans-serif;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .btn-save:hover:not(:disabled) {
-  background: #0066cc;
+  box-shadow: 0 4px 12px rgba(136, 109, 221, 0.3);
+  transform: translateY(-2px);
 }
 
 .btn-save:disabled {
-  background: #ccc;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
@@ -277,28 +374,6 @@ input:disabled + .slider {
   background: #dd0000;
 }
 
-/* Info Section */
-.info-section {
-  background: #f0f7ff;
-  border: 1px solid #b3d9ff;
-}
-
-.info-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.info-content p {
-  margin: 0;
-  font-size: 13px;
-  color: #333;
-}
-
-.info-content strong {
-  color: #0084ff;
-}
-
 /* Loading State */
 .settings-loading {
   display: flex;
@@ -334,6 +409,7 @@ input:disabled + .slider {
 
   .settings-content {
     padding: 16px;
+    max-width: 100%;
   }
 
   .settings-section {
@@ -349,4 +425,348 @@ input:disabled + .slider {
   .toggle-switch {
     align-self: flex-start;
   }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
+  }
+}
+
+/* Mobile phones (600px) */
+@media (max-width: 600px) {
+  .settings-container {
+    height: 100vh;
+  }
+
+  .settings-header {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .btn-back {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .settings-header h1 {
+    font-size: 20px;
+  }
+
+  .settings-content {
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .settings-section {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .settings-section.user-profile-card {
+    padding: 16px;
+  }
+
+  .user-card-container {
+    width: 100%;
+  }
+
+  .user-card-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+
+  .user-card-name {
+    font-size: 16px;
+  }
+
+  .user-card-username {
+    font-size: 13px;
+  }
+
+  .user-card-email {
+    font-size: 12px;
+  }
+
+  .settings-section h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 9px 11px;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+  .form-group small {
+    font-size: 11px;
+  }
+
+  .btn-save,
+  .btn-logout {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .toggle-item {
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .toggle-info h3 {
+    font-size: 13px;
+  }
+
+  .toggle-info p {
+    font-size: 11px;
+  }
+
+  .account-info p {
+    font-size: 12px;
+  }
+
+  .info-content p {
+    font-size: 12px;
+  }
+
+  .settings-error,
+  .settings-success {
+    padding: 10px 12px;
+    font-size: 12px;
+    margin: 0 12px;
+  }
+}
+
+/* Extra small phones (480px) */
+@media (max-width: 480px) {
+  .settings-header {
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-back {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .settings-header h1 {
+    font-size: 18px;
+  }
+
+  .settings-content {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .settings-section {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .settings-section h2 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .form-group {
+    gap: 4px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .btn-save,
+  .btn-logout {
+    padding: 9px 16px;
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .toggle-item {
+    padding: 8px 0;
+  }
+
+  .toggle-info h3 {
+    font-size: 12px;
+  }
+
+  .toggle-info p {
+    font-size: 10px;
+  }
+
+  .toggle-switch {
+    width: 44px;
+    height: 24px;
+  }
+
+  .slider:before {
+    height: 20px;
+    width: 20px;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(18px);
+  }
+
+  .account-info,
+  .settings-error,
+  .settings-success {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .settings-container {
+  background: linear-gradient(135deg, #181C2A 0%, #252D3D 50%, #1f2633 100%);
+}
+
+body.midnight-mode .settings-header {
+  background: #252D3D;
+  border-bottom: 1px solid #3A4455;
+}
+
+body.midnight-mode .settings-header h1 {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .btn-back {
+  color: #886DDD;
+}
+
+body.midnight-mode .btn-back:hover {
+  background-color: rgba(136, 109, 221, 0.1);
+  color: #EFEFEF;
+}
+
+body.midnight-mode .settings-content {
+  background: transparent;
+}
+
+body.midnight-mode .settings-section {
+  background: #2E3647;
+  border: 1px solid #3A4455;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+body.midnight-mode .settings-section h2 {
+  color: #EFEFEF;
+  border-bottom-color: #3A4455;
+}
+
+body.midnight-mode .settings-section.user-profile-card {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  border: 2px solid rgba(136, 109, 221, 0.3);
+  box-shadow: 0 8px 24px rgba(136, 109, 221, 0.2);
+}
+
+body.midnight-mode .user-card-name,
+body.midnight-mode .user-card-username,
+body.midnight-mode .user-card-email {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .form-group label {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .form-group input,
+body.midnight-mode .form-group textarea {
+  background-color: #3A4455;
+  border-color: #4A5565;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .form-group input:focus,
+body.midnight-mode .form-group textarea:focus {
+  border-color: #886DDD;
+  box-shadow: 0 0 0 3px rgba(136, 109, 221, 0.2);
+  background-color: #3A4455;
+}
+
+body.midnight-mode .form-group input::placeholder {
+  color: #8A92A5;
+}
+
+body.midnight-mode .form-group small {
+  color: #8A92A5;
+}
+
+body.midnight-mode .btn-save {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  border: 1px solid rgba(136, 109, 221, 0.3);
+}
+
+body.midnight-mode .btn-save:hover:not(:disabled) {
+  box-shadow: 0 4px 16px rgba(136, 109, 221, 0.4);
+}
+
+body.midnight-mode .btn-logout {
+  background: rgba(220, 53, 69, 0.8);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #EFEFEF;
+}
+
+body.midnight-mode .btn-logout:hover {
+  background: #dc3545;
+  border-color: rgba(220, 53, 69, 0.5);
+}
+
+body.midnight-mode .settings-toggle {
+  border-color: #3A4455;
+}
+
+body.midnight-mode .toggle-item {
+  border-bottom: 1px solid #3A4455;
+}
+
+body.midnight-mode .toggle-info h3 {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .toggle-info p {
+  color: #B8C1D4;
+}
+
+body.midnight-mode .toggle-switch input:checked + .slider {
+  background: linear-gradient(86.57deg, #886DDD 29.14%, #2B6BBE 106.58%);
+  box-shadow: 0 0 8px rgba(136, 109, 221, 0.3);
+}
+
+body.midnight-mode .toggle-switch {
+  background-color: #3A4455;
+}
+
+body.midnight-mode .settings-error {
+  background: rgba(198, 40, 40, 0.15);
+  border-left-color: #FF6B6B;
+  color: #FF8787;
+}
+
+body.midnight-mode .settings-success {
+  background: rgba(46, 125, 50, 0.15);
+  border-left-color: #51CF66;
+  color: #69DB7C;
 }
