@@ -98,7 +98,7 @@ export default function ChatPage({ user }) {
       try {
         const { data: users, error: usersError } = await supabase
           .from('users')
-          .select('id, username, display_name, avatar_url')
+          .select('id, username, display_name')
           .neq('id', user.id) // Exclude current user
 
         if (usersError) throw usersError
@@ -339,7 +339,7 @@ export default function ChatPage({ user }) {
         // Get all messages in conversation
         const { data: messageData, error: messageError } = await supabase
           .from('messages')
-          .select('*, users:sender_id(username, display_name, avatar_url)')
+          .select('*, users:sender_id(username, display_name)')
           .eq('conversation_id', selectedConversation)
           .order('created_at', { ascending: true })
 
@@ -383,7 +383,7 @@ export default function ChatPage({ user }) {
           // Fetch the complete message with user info
           const { data: messageWithUser } = await supabase
             .from('messages')
-            .select('*, users:sender_id(username, display_name, avatar_url)')
+            .select('*, users:sender_id(username, display_name)')
             .eq('id', payload.new.id)
             .single()
 
@@ -442,7 +442,7 @@ export default function ChatPage({ user }) {
       
       const { data: repliesData, error: repliesError } = await supabase
         .from('message_replies')
-        .select('*, users:sender_id(username, display_name, avatar_url)')
+        .select('*, users:sender_id(username, display_name)')
         .eq('parent_message_id', messageId)
         .order('created_at', { ascending: true })
 
@@ -468,7 +468,7 @@ export default function ChatPage({ user }) {
             // Fetch the complete reply with user info
             const { data: replyWithUser } = await supabase
               .from('message_replies')
-              .select('*, users:sender_id(username, display_name, avatar_url)')
+              .select('*, users:sender_id(username, display_name)')
               .eq('id', payload.new.id)
               .single()
 
@@ -522,7 +522,6 @@ export default function ChatPage({ user }) {
         users: {
           username: userProfile?.username,
           display_name: userProfile?.display_name,
-          avatar_url: userProfile?.avatar_url,
         },
       }
 
@@ -633,7 +632,6 @@ export default function ChatPage({ user }) {
         users: {
           username: userProfile?.username,
           display_name: userProfile?.display_name,
-          avatar_url: userProfile?.avatar_url,
         },
       }
       

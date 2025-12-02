@@ -31,13 +31,9 @@ export default function SearchBar({
                 onClick={() => handleStartConversation(searchUser.id)}
               >
                 <div className="user-avatar-small">
-                  {searchUser.avatar_url ? (
-                    <img src={searchUser.avatar_url} alt={searchUser.username} />
-                  ) : (
-                    <span className="avatar-placeholder-small">
-                      {searchUser.username?.charAt(0).toUpperCase()}
-                    </span>
-                  )}
+                  <span className="avatar-placeholder-small">
+                    {searchUser.username?.charAt(0).toUpperCase()}
+                  </span>
                   <span className="online-indicator"></span>
                 </div>
                 <div className="search-result-info">

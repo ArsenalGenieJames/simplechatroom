@@ -317,3 +317,55 @@
     min-height: 100vh;
   }
 }
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+/* Chat Container - Midnight Mode */
+body.midnight-mode .chat-container {
+  background: linear-gradient(135deg, #181C2A 0%, #252D3D 50%, #1f2633 100%);
+}
+
+/* Sidebar - Midnight Mode */
+body.midnight-mode .chat-sidebar {
+  background-color: #1f2633;
+  border-right: 1px solid #3A4455;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.midnight-mode .chat-sidebar-header {
+  border-bottom: 1px solid #3A4455;
+}
+
+body.midnight-mode .chat-sidebar-header h2 {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .btn-settings {
+  background: linear-gradient(90deg, #886DDD 0%, #2B6BBE 100%);
+}
+
+body.midnight-mode .btn-settings:hover {
+  box-shadow: 0 4px 12px rgba(136, 109, 221, 0.4);
+}
+
+body.midnight-mode .chat-error {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #FF6B6B;
+  border-bottom: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* Main Chat Area - Midnight Mode */
+body.midnight-mode .chat-main {
+  background-color: transparent;
+}
+
+body.midnight-mode .no-conversation-selected {
+  color: #B8C1D4;
+  background: transparent;
+}
+
+body.midnight-mode .chat-loading {
+  color: #B8C1D4;
+}

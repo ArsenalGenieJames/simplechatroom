@@ -182,3 +182,55 @@
     max-height: 200px;
   }
 }
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .search-bar-container {
+  background-color: #252D3D;
+  border-bottom: 1px solid #3A4455;
+}
+
+body.midnight-mode .search-input {
+  background-color: #3A4455;
+  border: 1px solid #4A5565;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .search-input:focus {
+  outline: none;
+  border-color: #886DDD;
+  box-shadow: 0 0 0 3px rgba(136, 109, 221, 0.2);
+}
+
+body.midnight-mode .search-input::placeholder {
+  color: #8A92A5;
+}
+
+body.midnight-mode .search-results {
+  background-color: #2E3647;
+  border: 1px solid #3A4455;
+  border-top: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.midnight-mode .search-result-item {
+  border-bottom: 1px solid #3A4455;
+}
+
+body.midnight-mode .search-result-item:hover {
+  background-color: #3A4455;
+}
+
+body.midnight-mode .search-result-name {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .search-result-username {
+  color: #8A92A5;
+}
+
+body.midnight-mode .avatar-placeholder-small {
+  background: linear-gradient(90deg, #886DDD 0%, #2B6BBE 100%);
+}

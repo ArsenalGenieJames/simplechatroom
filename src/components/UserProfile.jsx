@@ -6,13 +6,9 @@ export default function UserProfile({ userProfile, user }) {
     <div className="chat-sidebar-footer">
       <div className="user-info">
         <div className="user-avatar">
-          {userProfile?.avatar_url ? (
-            <img src={userProfile.avatar_url} alt={userProfile.username} />
-          ) : (
-            <span className="avatar-placeholder">
-              {userProfile?.username?.charAt(0).toUpperCase() || 'U'}
-            </span>
-          )}
+          <span className="avatar-placeholder">
+            {userProfile?.username?.charAt(0).toUpperCase() || 'U'}
+          </span>
         </div>
         <div className="user-details">
           <div className="user-username">{userProfile?.username || 'User'}</div>

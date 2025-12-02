@@ -228,3 +228,59 @@
     font-size: 16px;
   }
 }
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .message-form {
+  background-color: #252D3D;
+  border-top: 1px solid #3A4455;
+}
+
+body.midnight-mode .message-input {
+  background-color: #3A4455;
+  border: 1px solid #4A5565;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .message-input:focus {
+  outline: none;
+  border-color: #886DDD;
+  box-shadow: 0 0 0 3px rgba(136, 109, 221, 0.2);
+}
+
+body.midnight-mode .message-input::placeholder {
+  color: #8A92A5;
+}
+
+body.midnight-mode .message-input:disabled {
+  background-color: #2E3647;
+  color: #6A7280;
+}
+
+body.midnight-mode .message-send-btn {
+  background: linear-gradient(90deg, #886DDD 0%, #2B6BBE 100%);
+  color: #EFEFEF;
+  border: 1px solid rgba(136, 109, 221, 0.3);
+}
+
+body.midnight-mode .message-send-btn:hover:not(:disabled) {
+  box-shadow: 0 2px 6px rgba(136, 109, 221, 0.4);
+}
+
+body.midnight-mode .message-send-btn:disabled {
+  background: #4A5565;
+  border-color: #3A4455;
+  color: #6A7280;
+}
+
+body.midnight-mode .typing-indicator {
+  background-color: #252D3D;
+  border-bottom: 1px solid #3A4455;
+  color: #8A92A5;
+}
+
+body.midnight-mode .typing-dots span {
+  background-color: #886DDD;
+}

@@ -157,13 +157,9 @@ export default function SettingsPage({ user, onBack }) {
           <div className="user-card-container">
             <div className="user-card-avatar-wrapper">
               <div className="user-card-avatar">
-                {userProfile?.avatar_url ? (
-                  <img src={userProfile.avatar_url} alt={userProfile.username} />
-                ) : (
-                  <span className="avatar-placeholder">
-                    {userProfile?.username?.charAt(0).toUpperCase() || 'U'}
-                  </span>
-                )}
+                <span className="avatar-placeholder">
+                  {userProfile?.username?.charAt(0).toUpperCase() || 'U'}
+                </span>
               </div>
             </div>
             <div className="user-card-info">
