@@ -32,15 +32,15 @@ export default function SearchBar({
               >
                 <div className="user-avatar-small">
                   <span className="avatar-placeholder-small">
-                    {searchUser.username?.charAt(0).toUpperCase()}
+                    {(searchUser.username || searchUser.display_name || 'U')?.charAt(0).toUpperCase()}
                   </span>
                   <span className="online-indicator"></span>
                 </div>
                 <div className="search-result-info">
                   <div className="search-result-name">
-                    {searchUser.display_name || searchUser.username}
+                    {searchUser.display_name || searchUser.username || 'User'}
                   </div>
-                  <div className="search-result-username">@{searchUser.username}</div>
+                  <div className="search-result-username">@{searchUser.username || 'unknown'}</div>
                 </div>
               </div>
             ))

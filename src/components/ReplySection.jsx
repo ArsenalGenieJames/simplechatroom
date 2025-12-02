@@ -59,7 +59,7 @@ export default function ReplySection({
                 }`}
               >
                 <div className="reply-sender">
-                  {reply.users?.display_name || reply.users?.username || 'Unknown'}
+                  {reply.users?.display_name ? reply.users.display_name : (reply.users?.username || 'Unknown')}
                 </div>
                 <div className="reply-body">{reply.body}</div>
                 <div className="reply-time">

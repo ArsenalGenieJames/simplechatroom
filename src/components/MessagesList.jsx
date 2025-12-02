@@ -35,7 +35,7 @@ export default function MessagesList({
             }`}
           >
             <div className="message-sender">
-              {message.users?.display_name || message.users?.username || 'Unknown'}
+              {message.users?.display_name ? message.users.display_name : (message.users?.username || 'Unknown')}
             </div>
             <div className="message-body">{message.body}</div>
             <div className="message-time">

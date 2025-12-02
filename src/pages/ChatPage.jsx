@@ -98,13 +98,18 @@ export default function ChatPage({ user }) {
       try {
         const { data: users, error: usersError } = await supabase
           .from('users')
-          .select('id, username, display_name')
+          .select('id, username, display_name, email')
           .neq('id', user.id) // Exclude current user
 
-        if (usersError) throw usersError
+        if (usersError) {
+          console.error('Error fetching users - Error details:', usersError)
+          throw usersError
+        }
+        console.log('Fetched users:', users)
         setAllUsers(users || [])
       } catch (error) {
         console.error('Error fetching users:', error)
+        setAllUsers([])
       }
     }
 
@@ -119,10 +124,18 @@ export default function ChatPage({ user }) {
       return
     }
 
-    const results = allUsers.filter((u) =>
-      u.username.toLowerCase().includes(query.toLowerCase()) ||
-      (u.display_name && u.display_name.toLowerCase().includes(query.toLowerCase()))
-    )
+    const lowerQuery = query.toLowerCase().trim()
+    const results = allUsers.filter((u) => {
+      const username = u.username?.toLowerCase() || ''
+      const displayName = u.display_name?.toLowerCase() || ''
+      
+      return (
+        username.includes(lowerQuery) ||
+        displayName.includes(lowerQuery)
+      )
+    })
+    
+    console.log('Search results for query:', query, 'Results:', results)
     setSearchResults(results)
     setShowSearchResults(true)
   }
@@ -253,11 +266,18 @@ export default function ChatPage({ user }) {
 
               if (otherUserId) {
                 // Get the other user's info
-                const { data: otherUser } = await supabase
+                const { data: otherUserArray, error: userError } = await supabase
                   .from('users')
                   .select('username, display_name')
                   .eq('id', otherUserId)
-                  .single()
+
+                if (userError) {
+                  console.error('Error fetching user:', userError)
+                }
+
+                const otherUser = otherUserArray?.[0]
+                
+                console.log('Other user data:', { otherUserId, otherUserArray, otherUser, display_name: otherUser?.display_name, username: otherUser?.username })
 
                 return {
                   ...conversation,
@@ -337,7 +357,7 @@ export default function ChatPage({ user }) {
         // Get all messages in conversation
         const { data: messageData, error: messageError } = await supabase
           .from('messages')
-          .select('*, users:sender_id(username, display_name)')
+          .select('*, users(id, username, display_name, email)')
           .eq('conversation_id', selectedConversation)
           .order('created_at', { ascending: true })
 
@@ -381,25 +401,12 @@ export default function ChatPage({ user }) {
           // Fetch the complete message with user info
           const { data: messageWithUser } = await supabase
             .from('messages')
-            .select('*, users:sender_id(username, display_name)')
+            .select('*, users:sender_id(id, username, display_name, email)')
             .eq('id', payload.new.id)
             .single()
 
           if (messageWithUser) {
             setMessages((prev) => [...prev, messageWithUser])
-
-            // Send notification if message is from another user
-            if (messageWithUser.sender_id !== user.id) {
-              const senderName =
-                messageWithUser.users?.display_name ||
-                messageWithUser.users?.username ||
-                'Unknown User'
-
-              sendNotification(`New message from ${senderName}`, {
-                body: messageWithUser.body,
-                tag: `message-${messageWithUser.conversation_id}`,
-              })
-            }
           }
         }
       )
@@ -440,7 +447,7 @@ export default function ChatPage({ user }) {
       
       const { data: repliesData, error: repliesError } = await supabase
         .from('message_replies')
-        .select('*, users:sender_id(username, display_name)')
+        .select('*, users:sender_id(id, username, display_name, email)')
         .eq('parent_message_id', messageId)
         .order('created_at', { ascending: true })
 
@@ -466,7 +473,7 @@ export default function ChatPage({ user }) {
             // Fetch the complete reply with user info
             const { data: replyWithUser } = await supabase
               .from('message_replies')
-              .select('*, users:sender_id(username, display_name)')
+              .select('*, users:sender_id(id, username, display_name, email)')
               .eq('id', payload.new.id)
               .single()
 
@@ -475,19 +482,6 @@ export default function ChatPage({ user }) {
                 ...prev,
                 [messageId]: [...(prev[messageId] || []), replyWithUser],
               }))
-
-              // Send notification for replies
-              if (replyWithUser.sender_id !== user.id) {
-                const senderName =
-                  replyWithUser.users?.display_name ||
-                  replyWithUser.users?.username ||
-                  'Unknown User'
-
-                sendNotification(`${senderName} replied`, {
-                  body: replyWithUser.body,
-                  tag: `reply-${messageId}`,
-                })
-              }
             }
           }
         )

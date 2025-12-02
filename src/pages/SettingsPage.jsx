@@ -12,7 +12,6 @@ export default function SettingsPage({ user, onBack }) {
   // Settings state
   const [displayName, setDisplayName] = useState('')
   const [username, setUsername] = useState('')
-  const [notifications, setNotifications] = useState(true)
   const [typingIndicators, setTypingIndicators] = useState(true)
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [midnightMode, setMidnightMode] = useState(false)
@@ -35,12 +34,10 @@ export default function SettingsPage({ user, onBack }) {
         setUsername(profile.username || '')
         
         // Load settings from localStorage
-        const savedNotifications = localStorage.getItem('notifications_enabled')
         const savedTyping = localStorage.getItem('typing_indicators_enabled')
         const savedSound = localStorage.getItem('sound_enabled')
         const savedMidnightMode = localStorage.getItem('midnight_mode')
         
-        if (savedNotifications !== null) setNotifications(savedNotifications === 'true')
         if (savedTyping !== null) setTypingIndicators(savedTyping === 'true')
         if (savedSound !== null) setSoundEnabled(savedSound === 'true')
         if (savedMidnightMode !== null) setMidnightMode(savedMidnightMode === 'true')
@@ -85,11 +82,6 @@ export default function SettingsPage({ user, onBack }) {
   }
 
   // Handle settings toggle
-  const handleToggleNotifications = (enabled) => {
-    setNotifications(enabled)
-    localStorage.setItem('notifications_enabled', enabled)
-  }
-
   const handleToggleTypingIndicators = (enabled) => {
     setTypingIndicators(enabled)
     localStorage.setItem('typing_indicators_enabled', enabled)
@@ -198,43 +190,6 @@ export default function SettingsPage({ user, onBack }) {
               {saving ? 'Saving...' : 'Save Profile'}
             </button>
           </form>
-        </section>
-
-        {/* Notification Settings */}
-        <section className="settings-section">
-          <h2>Notifications</h2>
-          <div className="settings-toggle">
-            <div className="toggle-item">
-              <div className="toggle-info">
-                <h3>Message Notifications</h3>
-                <p>Get notified when you receive new messages</p>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={notifications}
-                  onChange={(e) => handleToggleNotifications(e.target.checked)}
-                />
-                <span className="slider"></span>
-              </label>
-            </div>
-
-            <div className="toggle-item">
-              <div className="toggle-info">
-                <h3>Sound Notifications</h3>
-                <p>Play sound when messages arrive</p>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={soundEnabled}
-                  onChange={(e) => handleToggleSound(e.target.checked)}
-                  disabled={!notifications}
-                />
-                <span className="slider"></span>
-              </label>
-            </div>
-          </div>
         </section>
 
         {/* Chat Settings */}
