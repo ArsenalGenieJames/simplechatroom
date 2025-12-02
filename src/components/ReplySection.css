@@ -132,3 +132,79 @@
     transform: translateY(0);
   }
 }
+
+/* ============================================
+   MIDNIGHT MODE THEME
+   ============================================ */
+
+body.midnight-mode .reply-section {
+  border-left-color: #4A5568;
+}
+
+body.midnight-mode .reply-count-btn {
+  color: #6B9FE8;
+}
+
+body.midnight-mode .reply-count-btn:hover {
+  color: #7BA9F0;
+}
+
+body.midnight-mode .reply {
+  background: #3A4455;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .reply-sent {
+  background: #3A4455;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .reply-received {
+  background: #3A4455;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .reply-sender {
+  color: #B8C1D4;
+}
+
+body.midnight-mode .reply-body {
+  color: #EFEFEF;
+}
+
+body.midnight-mode .reply-time {
+  color: #8A92A5;
+}
+
+body.midnight-mode .replies-loading,
+body.midnight-mode .no-replies {
+  color: #8A92A5;
+}
+
+body.midnight-mode .reply-input {
+  background-color: #252D3D;
+  border-color: #4A5568;
+  color: #EFEFEF;
+}
+
+body.midnight-mode .reply-input:focus {
+  border-color: #6B9FE8;
+  box-shadow: 0 0 0 2px rgba(107, 159, 232, 0.1);
+}
+
+body.midnight-mode .reply-input:disabled {
+  background-color: #2E3647;
+  color: #8A92A5;
+}
+
+body.midnight-mode .reply-send-btn {
+  background: #6B9FE8;
+}
+
+body.midnight-mode .reply-send-btn:hover:not(:disabled) {
+  background: #7BA9F0;
+}
+
+body.midnight-mode .reply-send-btn:disabled {
+  background: #4A5568;
+}

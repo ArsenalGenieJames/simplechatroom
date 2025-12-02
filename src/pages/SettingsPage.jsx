@@ -12,7 +12,6 @@ export default function SettingsPage({ user, onBack }) {
   // Settings state
   const [displayName, setDisplayName] = useState('')
   const [username, setUsername] = useState('')
-  const [bio, setBio] = useState('')
   const [notifications, setNotifications] = useState(true)
   const [typingIndicators, setTypingIndicators] = useState(true)
   const [soundEnabled, setSoundEnabled] = useState(true)
@@ -34,7 +33,6 @@ export default function SettingsPage({ user, onBack }) {
         setUserProfile(profile)
         setDisplayName(profile.display_name || '')
         setUsername(profile.username || '')
-        setBio(profile.bio || '')
         
         // Load settings from localStorage
         const savedNotifications = localStorage.getItem('notifications_enabled')
@@ -70,9 +68,6 @@ export default function SettingsPage({ user, onBack }) {
         .from('users')
         .update({
           display_name: displayName,
-          username: username,
-          bio: bio,
-          updated_at: new Date().toISOString(),
         })
         .eq('id', user.id)
 
@@ -82,6 +77,7 @@ export default function SettingsPage({ user, onBack }) {
       setTimeout(() => setSuccess(null), 3000)
     } catch (error) {
       console.error('Error updating profile:', error)
+      console.error('Full error details:', error.message)
       setError('Failed to update profile')
     } finally {
       setSaving(false)
@@ -196,17 +192,6 @@ export default function SettingsPage({ user, onBack }) {
                 disabled
               />
               <small>Username cannot be changed</small>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="bio">Bio</label>
-              <textarea
-                id="bio"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                placeholder="Tell us about yourself..."
-                rows="4"
-              />
             </div>
 
             <button type="submit" className="btn-save" disabled={saving}>
