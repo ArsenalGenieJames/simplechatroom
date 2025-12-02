@@ -198,9 +198,8 @@ The application contributes to society by:
 - Message search capabilities
 - Message timestamp recording
 
-**3. Conversation Management**
+**2. Conversation Management**
 - One-to-one direct messaging
-- Group conversation support
 - Conversation participant tracking
 - Conversation history preservation
 
@@ -251,13 +250,12 @@ The application contributes to society by:
 4. **Message Editing**: Message modification after sending not implemented
 5. **Message Deletion**: Message removal functionality not available
 6. **User Blocking**: User blocking and muting features not implemented
-7. **Group Administration**: Limited group management functionality
-8. **Message Search**: Full-text search not implemented
+7. **Message Search**: Full-text search not implemented
 
 #### Project Constraints:
 
 1. **Development Timeline**: Current implementation represents version 1.0; advanced features deferred to future releases
-2. **Resource Limitations**: Single-developer project limiting simultaneous feature development
+2. **Resource Limitations**: Team-based project with distributed responsibilities (UI/UX development and research documentation)
 3. **Scalability Considerations**: Current architecture suitable for small to medium user bases (< 10,000 concurrent users)
 4. **Third-Party Dependency**: Reliance on Supabase infrastructure introduces external dependency
 
@@ -362,7 +360,6 @@ CREATE TABLE users (
 CREATE TABLE conversations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title TEXT,
-  is_group BOOLEAN DEFAULT false,
   created_by UUID REFERENCES users(id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -780,7 +777,7 @@ This research paper documents not only the technical implementation but also the
 - **Project Name**: Midnight – Simple Chat Room
 - **Project Type**: Research Study & Web Application
 - **Development Period**: December 2025
-- **Developer Team**: Full-Stack Development Team
+- **Developer Team**: Genie James Arsenal (UI/UX & Web Development), Melcorvin Chua Macaliag (Research & Documentation)
 - **Repository**: https://github.com/ArsenalGenieJames/simplechatroom
 - **License**: MIT
 - **Status**: Production Ready (v1.0)
@@ -811,7 +808,20 @@ This research paper documents not only the technical implementation but also the
 - Message Editing/Deletion
 - User Blocking
 - Mobile Native Apps
-- Group Administration Tools
+
+---
+
+## DEVELOPMENT TEAM
+
+### Project Contributors
+
+**Genie James Arsenal**
+- Role: UI/UX Design & Web Development
+- Responsibilities: Frontend component development, user interface design, responsive layout implementation, real-time messaging functionality
+
+**Melcorvin Chua Macaliag**
+- Role: Research Papers & Documentation
+- Responsibilities: Academic research paper writing, system documentation, methodology analysis, technical specifications
 
 ---
 

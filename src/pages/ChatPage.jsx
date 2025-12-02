@@ -159,7 +159,6 @@ export default function ChatPage({ user }) {
         .insert([
           {
             title: null,
-            is_group: false,
             created_by: user.id,
           },
         ])
@@ -196,7 +195,6 @@ export default function ChatPage({ user }) {
         {
           id: conversationId,
           title: null,
-          is_group: false,
           created_by: user.id,
           created_at: new Date().toISOString(),
           otherUserUsername: targetUser?.display_name || targetUser?.username || 'User',
@@ -243,7 +241,7 @@ export default function ChatPage({ user }) {
         // For each conversation, get the other user's info if it's a direct message
         const conversationsWithUserInfo = await Promise.all(
           conversationData.map(async (conversation) => {
-            if (!conversation.is_group && !conversation.title) {
+            if (!conversation.title) {
               // Get all participants in this conversation
               const { data: participants } = await supabase
                 .from('conversation_participants')
@@ -687,7 +685,6 @@ export default function ChatPage({ user }) {
 
   const getConversationTitle = (conversation) => {
     if (conversation.title) return conversation.title
-    if (conversation.is_group) return 'Group Chat'
     
     // For direct messages, try to get the other user's username
     // This will be fetched when we load conversation details
