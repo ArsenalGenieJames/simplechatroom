@@ -60,6 +60,10 @@
   background-color: #f9f9f9;
 }
 
+.search-result-item:active {
+  background-color: #f0f0f0;
+}
+
 .search-result-item:last-child {
   border-bottom: none;
 }
@@ -100,6 +104,16 @@
   background-color: #28a745;
   border: 2px solid white;
   border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .search-result-info {
@@ -115,6 +129,25 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.online-badge {
+  color: #28a745;
+  font-size: 12px;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .search-result-username {
@@ -152,6 +185,10 @@
   .search-results {
     max-height: 250px;
   }
+  
+  .online-badge {
+    font-size: 11px;
+  }
 }
 
 /* Extra small phones (480px) */
@@ -180,6 +217,15 @@
 
   .search-results {
     max-height: 200px;
+  }
+  
+  .online-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .online-badge {
+    font-size: 10px;
   }
 }
 
@@ -223,6 +269,10 @@ body.midnight-mode .search-result-item:hover {
   background-color: #3A4455;
 }
 
+body.midnight-mode .search-result-item:active {
+  background-color: #4A5565;
+}
+
 body.midnight-mode .search-result-name {
   color: #EFEFEF;
 }
@@ -233,4 +283,13 @@ body.midnight-mode .search-result-username {
 
 body.midnight-mode .avatar-placeholder-small {
   background: linear-gradient(90deg, #886DDD 0%, #2B6BBE 100%);
+}
+
+body.midnight-mode .online-badge {
+  color: #51CF66;
+}
+
+body.midnight-mode .online-indicator {
+  background-color: #51CF66;
+  border-color: #2E3647;
 }

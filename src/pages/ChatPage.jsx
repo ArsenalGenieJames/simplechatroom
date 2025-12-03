@@ -21,6 +21,7 @@ export default function ChatPage({ user }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [allUsers, setAllUsers] = useState([])
+  const [onlineUsers, setOnlineUsers] = useState(new Set())
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [typingUsers, setTypingUsers] = useState([])
   const [typingTimeout, setTypingTimeout] = useState(null)
@@ -29,6 +30,7 @@ export default function ChatPage({ user }) {
   const [repliesLoading, setRepliesLoading] = useState({})
   const [showSettings, setShowSettings] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [presenceChannel, setPresenceChannel] = useState(null)
 
   // Request notification permission and send notifications
   const requestNotificationPermission = async () => {
@@ -56,6 +58,61 @@ export default function ChatPage({ user }) {
       }
     }
   }
+
+  // Set up online presence tracking
+  useEffect(() => {
+    if (!user) return
+
+    // Create presence channel
+    const channel = supabase.channel('online-users', {
+      config: {
+        presence: {
+          key: user.id,
+        },
+      },
+    })
+
+    // Track presence state changes
+    channel
+      .on('presence', { event: 'sync' }, () => {
+        const state = channel.presenceState()
+        const online = new Set()
+        
+        Object.keys(state).forEach((userId) => {
+          if (state[userId] && state[userId].length > 0) {
+            online.add(userId)
+          }
+        })
+        
+        setOnlineUsers(online)
+        console.log('Online users:', Array.from(online))
+      })
+      .on('presence', { event: 'join' }, ({ key, newPresences }) => {
+        console.log('User joined:', key)
+      })
+      .on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
+        console.log('User left:', key)
+      })
+      .subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          // Track current user as online
+          await channel.track({
+            user_id: user.id,
+            username: userProfile?.username || user.email,
+            online_at: new Date().toISOString(),
+          })
+        }
+      })
+
+    setPresenceChannel(channel)
+
+    // Cleanup on unmount
+    return () => {
+      if (channel) {
+        channel.unsubscribe()
+      }
+    }
+  }, [user, userProfile])
 
   // Fetch user's conversations
   useEffect(() => {
@@ -143,6 +200,8 @@ export default function ChatPage({ user }) {
   // Create or get conversation with user
   const handleStartConversation = async (targetUserId) => {
     try {
+      console.log('Starting conversation with user:', targetUserId)
+      
       // Check if conversation already exists between these two users
       const { data: existingConversation } = await supabase
         .from('conversation_participants')
@@ -159,13 +218,16 @@ export default function ChatPage({ user }) {
           .single()
 
         if (directChat) {
+          console.log('Found existing conversation:', directChat.conversation_id)
           setSelectedConversation(directChat.conversation_id)
           setShowSearchResults(false)
           setSearchQuery('')
+          setSidebarOpen(false) // Close sidebar on mobile
           return
         }
       }
 
+      console.log('Creating new conversation...')
       // Create new conversation
       const { data: newConversation, error: convError } = await supabase
         .from('conversations')
@@ -177,9 +239,13 @@ export default function ChatPage({ user }) {
         ])
         .select()
 
-      if (convError) throw convError
+      if (convError) {
+        console.error('Error creating conversation:', convError)
+        throw convError
+      }
 
       const conversationId = newConversation[0].id
+      console.log('Created conversation:', conversationId)
 
       // Add both users as participants
       const { error: participantError } = await supabase
@@ -189,7 +255,10 @@ export default function ChatPage({ user }) {
           { conversation_id: conversationId, user_id: targetUserId },
         ])
 
-      if (participantError) throw participantError
+      if (participantError) {
+        console.error('Error adding participants:', participantError)
+        throw participantError
+      }
 
       // Get target user's info for display
       const { data: targetUser } = await supabase
@@ -198,9 +267,12 @@ export default function ChatPage({ user }) {
         .eq('id', targetUserId)
         .single()
 
+      console.log('Target user:', targetUser)
+
       setSelectedConversation(conversationId)
       setShowSearchResults(false)
       setSearchQuery('')
+      setSidebarOpen(false) // Close sidebar on mobile
 
       // Refresh conversations
       setConversations((prev) => [
@@ -213,6 +285,8 @@ export default function ChatPage({ user }) {
           otherUserUsername: targetUser?.display_name || targetUser?.username || 'User',
         },
       ])
+      
+      console.log('Conversation started successfully')
     } catch (error) {
       console.error('Error starting conversation:', error)
       setError(error.message)
@@ -728,9 +802,43 @@ export default function ChatPage({ user }) {
           searchResults={searchResults}
           showSearchResults={showSearchResults}
           handleStartConversation={handleStartConversation}
+          onlineUsers={onlineUsers}
         />
 
         {error && <div className="chat-error">{error}</div>}
+
+        {/* Online Users Section */}
+        {!showSearchResults && onlineUsers.size > 1 && (
+          <div className="online-users-section">
+            <div className="online-users-header">
+              <span className="online-indicator-pulse"></span>
+              <span className="online-users-title">Online ({onlineUsers.size - 1})</span>
+            </div>
+            <div className="online-users-list">
+              {allUsers
+                .filter(u => onlineUsers.has(u.id))
+                .slice(0, 10)
+                .map((onlineUser) => (
+                  <div
+                    key={onlineUser.id}
+                    className="online-user-item"
+                    onClick={() => handleStartConversation(onlineUser.id)}
+                    title={`Chat with ${onlineUser.display_name || onlineUser.username}`}
+                  >
+                    <div className="online-user-avatar">
+                      <span className="avatar-placeholder-online">
+                        {(onlineUser.username || onlineUser.display_name || 'U')?.charAt(0).toUpperCase()}
+                      </span>
+                      <span className="online-dot"></span>
+                    </div>
+                    <div className="online-user-name">
+                      {onlineUser.display_name || onlineUser.username || 'User'}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
 
         {/* Conversations List or Search Results */}
         {!showSearchResults && (
