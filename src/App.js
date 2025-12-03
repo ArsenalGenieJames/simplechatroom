@@ -3,6 +3,7 @@ import { supabase } from './supabaseClient'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import ChatPage from './pages/ChatPage'
+import InstallPrompt from './components/InstallPrompt'
 import './App.css'
 
 function App() {
@@ -49,14 +50,20 @@ function App() {
     return (
       <div>
         <ChatPage user={user} />
+        <InstallPrompt />
       </div>
     )
   }
 
-  return currentPage === 'login' ? (
-    <Login onSwitchToSignUp={() => setCurrentPage('signup')} />
-  ) : (
-    <SignUp onSwitchToLogin={() => setCurrentPage('login')} />
+  return (
+    <>
+      {currentPage === 'login' ? (
+        <Login onSwitchToSignUp={() => setCurrentPage('signup')} />
+      ) : (
+        <SignUp onSwitchToLogin={() => setCurrentPage('login')} />
+      )}
+      <InstallPrompt />
+    </>
   )
 }
 

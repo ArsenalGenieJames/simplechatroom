@@ -1,0 +1,141 @@
+.install-prompt {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  max-width: 400px;
+  width: calc(100% - 40px);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.install-prompt-content {
+  background: linear-gradient(135deg, #886DDD 0%, #6B4CE6 100%);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: white;
+}
+
+.install-prompt-icon {
+  font-size: 48px;
+  text-align: center;
+  line-height: 1;
+}
+
+.install-prompt-text {
+  text-align: center;
+}
+
+.install-prompt-text h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.install-prompt-text p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.install-prompt-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.install-btn-primary,
+.install-btn-secondary {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.install-btn-primary {
+  background: white;
+  color: #886DDD;
+}
+
+.install-btn-primary:hover {
+  background: #f5f5f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.install-btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.install-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Midnight mode support */
+body.midnight-mode .install-prompt-content {
+  background: linear-gradient(135deg, #1a1f2e 0%, #2d1b4e 100%);
+  border: 1px solid rgba(136, 109, 221, 0.3);
+}
+
+body.midnight-mode .install-btn-primary {
+  background: #886DDD;
+  color: white;
+}
+
+body.midnight-mode .install-btn-primary:hover {
+  background: #9a7eeb;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .install-prompt {
+    bottom: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .install-prompt-content {
+    padding: 16px;
+  }
+
+  .install-prompt-icon {
+    font-size: 40px;
+  }
+
+  .install-prompt-text h3 {
+    font-size: 18px;
+  }
+
+  .install-prompt-text p {
+    font-size: 13px;
+  }
+
+  .install-prompt-actions {
+    flex-direction: column;
+  }
+
+  .install-btn-primary,
+  .install-btn-secondary {
+    width: 100%;
+  }
+}
+
